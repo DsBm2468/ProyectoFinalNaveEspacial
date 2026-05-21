@@ -752,6 +752,55 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1503916249}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1033587246
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1033587248}
+  - component: {fileID: 1033587247}
+  m_Layer: 0
+  m_Name: SpawnEnemy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1033587247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1033587246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b95c62f4e79b806448f8ec4a94c5d4dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
+  enemyPrefab: {fileID: 3513445267592572027, guid: 45d0ae0dcbe73af429bbe87d900591d9, type: 3}
+  spawnRate: 2
+  maxEnemies: 2
+  xRange: {x: 0, y: 0}
+  yRange: {x: 0, y: 0}
+--- !u!4 &1033587248
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1033587246}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 4.2, y: 0, z: -145.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &1503916245
 GameObject:
   m_ObjectHideFlags: 0
@@ -765,9 +814,10 @@ GameObject:
   - component: {fileID: 1503916247}
   - component: {fileID: 1503916246}
   - component: {fileID: 1503916250}
+  - component: {fileID: 1503916251}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -784,7 +834,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e5d62ba61fd88a4286fad2672cfdbf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  moveSpeed: 20
+  baseSpeed: 20
+  maxBoostSpeed: 45
+  acceleration: 20
+  deceleration: 15
   rotationSpeed: 100
 --- !u!54 &1503916247
 Rigidbody:
@@ -865,6 +918,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerShoot
   bulletPrefab: {fileID: 5999635224631812161, guid: c737ed7f16902ec4f8989d99da596870, type: 3}
   firePoint: {fileID: 850305446}
+--- !u!114 &1503916251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1503916245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1edf512e6db005488e7661065a6f982, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
+  maxHealth: 100
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -874,3 +940,4 @@ SceneRoots:
   - {fileID: 766992723}
   - {fileID: 305314246}
   - {fileID: 334340814}
+  - {fileID: 1033587248}
