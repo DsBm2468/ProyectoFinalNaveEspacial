@@ -12,16 +12,30 @@ public class PlayerMovement : MonoBehaviour
 
     public float rotationSpeed = 100f;
 
+    public float boostThreshold = 0.8f;
+
     private float currentSpeed;
+
+    private ArduinoSerialReader arduino;
 
     void Start()
     {
         currentSpeed = baseSpeed;
+
+        arduino =
+        ArduinoSerialReader.Instance;
     }
 
     void Update()
     {
-        BoostControl();
+        if (arduino == null)
+            return;
+
+        arduino.GetNormalizedValues(
+        out float speedInput,
+        out float steeringInput);
+
+        BoostControl(speedInput);
 
         transform.position +=
         transform.forward *
@@ -29,10 +43,10 @@ public class PlayerMovement : MonoBehaviour
         Time.deltaTime;
 
         float yaw =
-        Input.GetAxis("Horizontal");
+        steeringInput;
 
         float pitch =
-        Input.GetAxis("Vertical");
+        speedInput;
 
         transform.Rotate(
         Vector3.up *
@@ -47,25 +61,27 @@ public class PlayerMovement : MonoBehaviour
         Time.deltaTime);
     }
 
-    void BoostControl()
+    void BoostControl(float speedInput)
     {
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            currentSpeed =
-            Mathf.MoveTowards(
-            currentSpeed,
-            maxBoostSpeed,
-            acceleration *
-            Time.deltaTime);
-        }
-        else
-        {
-            currentSpeed =
-            Mathf.MoveTowards(
-            currentSpeed,
-            baseSpeed,
-            deceleration *
-            Time.deltaTime);
-        }
+        bool boosting =
+        Mathf.Abs(speedInput)
+        >= boostThreshold;
+
+        float targetSpeed =
+        boosting
+        ? maxBoostSpeed
+        : baseSpeed;
+
+        float changeRate =
+        boosting
+        ? acceleration
+        : deceleration;
+
+        currentSpeed =
+        Mathf.MoveTowards(
+        currentSpeed,
+        targetSpeed,
+        changeRate *
+        Time.deltaTime);
     }
 }

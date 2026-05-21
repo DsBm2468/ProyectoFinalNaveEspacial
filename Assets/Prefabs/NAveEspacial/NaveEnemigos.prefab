@@ -47,6 +47,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 2962858972372730210, guid: cb64bdea012f51c41beb16d2209c10c6, type: 3}
   firePoint: {fileID: 3031061066668045454}
   fireRate: 2
+  shootDistance: 30
 --- !u!1 &3513445267592572027
 GameObject:
   m_ObjectHideFlags: 0
@@ -60,6 +61,7 @@ GameObject:
   - component: {fileID: 3153293431045770670}
   - component: {fileID: 6346969755420820308}
   - component: {fileID: 1336148771929502847}
+  - component: {fileID: 6278784199194360845}
   m_Layer: 0
   m_Name: NaveEnemigos
   m_TagString: Untagged
@@ -156,7 +158,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14ea06e6cf256004cbdfb71da954cdc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
-  speed: 5
+  moveSpeed: 10
+  rotationSpeed: 3
+  detectionDistance: 40
+  avoidDistance: 12
+  patrolRadius: 20
+  patrolChangeTime: 4
 --- !u!65 &1336148771929502847
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -178,6 +185,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 10.563394, y: 6.534698, z: 7.3554864}
   m_Center: {x: 0, y: -0.13002849, z: 0.44014096}
+--- !u!114 &6278784199194360845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3513445267592572027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80b941c3c5501d0449bf689b44114c56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
+  maxHealth: 3
 --- !u!1 &7097584144064837621
 GameObject:
   m_ObjectHideFlags: 0
@@ -225,3 +245,4 @@ MonoBehaviour:
   bulletPrefab: {fileID: 2962858972372730210, guid: cb64bdea012f51c41beb16d2209c10c6, type: 3}
   firePoint: {fileID: 6506071783054487955}
   fireRate: 2
+  shootDistance: 30
