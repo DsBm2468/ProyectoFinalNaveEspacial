@@ -856,8 +856,32 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6600978248715710513, guid: cb0b482b48111be4f9fc4aa7e16c3abc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1480585876}
   m_SourcePrefab: {fileID: 100100000, guid: cb0b482b48111be4f9fc4aa7e16c3abc, type: 3}
+--- !u!1 &1480585875 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6600978248715710513, guid: cb0b482b48111be4f9fc4aa7e16c3abc, type: 3}
+  m_PrefabInstance: {fileID: 1480585874}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1480585876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1480585875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93f545ca70638274bb2ca5d9d8e28a9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArduinoSerialReader
+  portName: COM5
+  baudRate: 9600
+  readTimeoutMs: 100
+  autoConnectOnStart: 1
 --- !u!1 &1503916245
 GameObject:
   m_ObjectHideFlags: 0
@@ -897,6 +921,7 @@ MonoBehaviour:
   acceleration: 20
   deceleration: 15
   rotationSpeed: 100
+  boostThreshold: 0.8
 --- !u!54 &1503916247
 Rigidbody:
   m_ObjectHideFlags: 0

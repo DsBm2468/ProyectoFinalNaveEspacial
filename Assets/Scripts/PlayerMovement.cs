@@ -28,14 +28,41 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (arduino == null)
-            return;
+        float speedInput;
 
-        arduino.GetNormalizedValues(
-        out float speedInput,
-        out float steeringInput);
+        float steeringInput;
 
-        BoostControl(speedInput);
+        bool boostInput;
+
+        if (
+        arduino != null
+        &&
+        arduino.IsConnected)
+        {
+            arduino.GetNormalizedValues(
+            out speedInput,
+            out steeringInput);
+
+            boostInput =
+            arduino.BoostButton;
+        }
+        else
+        {
+            speedInput =
+            Input.GetAxis(
+            "Vertical");
+
+            steeringInput =
+            Input.GetAxis(
+            "Horizontal");
+
+            boostInput =
+            Input.GetKey(
+            KeyCode.LeftShift);
+        }
+
+        BoostControl(
+        boostInput);
 
         transform.position +=
         transform.forward *
@@ -61,21 +88,22 @@ public class PlayerMovement : MonoBehaviour
         Time.deltaTime);
     }
 
-    void BoostControl(float speedInput)
+    void BoostControl(
+    bool boosting)
     {
-        bool boosting =
-        Mathf.Abs(speedInput)
-        >= boostThreshold;
-
         float targetSpeed =
         boosting
-        ? maxBoostSpeed
-        : baseSpeed;
+        ?
+        maxBoostSpeed
+        :
+        baseSpeed;
 
         float changeRate =
         boosting
-        ? acceleration
-        : deceleration;
+        ?
+        acceleration
+        :
+        deceleration;
 
         currentSpeed =
         Mathf.MoveTowards(
