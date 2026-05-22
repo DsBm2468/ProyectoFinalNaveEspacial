@@ -55,5 +55,24 @@ public class HatchManager : MonoBehaviour // Control de la escotilla
         partDoor1.localPosition = Vector3.Lerp(partDoor1.localPosition, destinationDoor1, Time.deltaTime * moveVelocity); // .Lerp da un punto intermedio entre la posición inicial y la final, al usarlo da un movimiento más fluido
         // Se usa Time.deltaTime * moveVelocity ya que indica a que velocidad da esos pasos intermedios hacia la posición de destino indicado
         partDoor2.localPosition = Vector3.Lerp(partDoor2.localPosition, destinationDoor2, Time.deltaTime * moveVelocity);
+
+
+        if (DoorIsOpen == true && suctionPoint != null) // Si la puerta está abierta y el punto de succión existe...
+        {
+            GameObject[] AllObjectsInSpaceship = GameObject.FindGameObjectsWithTag("FloatingObjects"); // Indica que todos los objetos que tengan el tag de FloatingObjects los tenga en cuenta (pero no necesariamente en orden)
+
+            foreach (GameObject obj in AllObjectsInSpaceship) // Por cada objeto en la nave...
+            {
+                float distance = Vector3.Distance(obj.transform.position, suctionPoint.position); // Calculará la distancia entre el objeto y el agujero de la puerta, teniendo en cuenta pa posición de ambos elementos
+                
+                if (distance <= suctionRange) // Si la distancia entre el objeto y el agujero de la puerta está dentro del rango de succión...
+                {
+                    Vector3 directionToSpace = (suctionPoint.position - obj.transform.position).normalized; // Se calcula la dirección de la presión hacia el exterior de la nave (hacia la puerta abierta)
+                    // Restando la posición del punto de succión con la posición del objeto
+
+                    //float intensityForce = (); // Si el objeto está más cerca del agujero de succión (la puerta abierta de la nave), la presión jala con más fuerza
+                }
+            }
+        }
     }
 }
