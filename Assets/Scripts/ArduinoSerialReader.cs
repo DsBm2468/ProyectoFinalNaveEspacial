@@ -24,13 +24,13 @@ public class ArduinoSerialReader : MonoBehaviour
     [SerializeField]
     private bool autoConnectOnStart = true;
 
-    public int RawHorizontal
+    public int RawHorizontal // X movimiento
     {
         get;
         private set;
     }
 
-    public int RawVertical
+    public int RawVertical // Y movimiento
     {
         get;
         private set;
@@ -159,13 +159,13 @@ public class ArduinoSerialReader : MonoBehaviour
     void ParseLine(string line)
     {
         if (
-        string.IsNullOrWhiteSpace(
+        string.IsNullOrWhiteSpace( // Evita procesar líneas vacías o solo con espacios
         line))
         {
             return;
         }
 
-        string[] parts =
+        string[] parts = // Divide la línea en partes usando la coma como separador
         line.Trim().Split(',');
 
         if (parts.Length != 4)
@@ -173,13 +173,13 @@ public class ArduinoSerialReader : MonoBehaviour
             return;
         }
 
-        if (
-        int.TryParse(
-        parts[0],
-        out int horizontal)
+        if ( // Intenta convertir cada parte a su tipo correspondiente (int para los valores de movimiento y bool para los botones)
+        int.TryParse( // Intenta convertir la primera parte a un entero para el movimiento horizontal
+        parts[0], // Si la conversión es exitosa, asigna el valor a la variable horizontal
+        out int horizontal) // Si la conversión falla, el método TryParse devuelve false y no se actualizan los valores
         &&
 
-        int.TryParse(
+        int.TryParse( // Intenta convertir la segunda parte a un entero para el movimiento vertical
         parts[1],
         out int vertical)
         &&
@@ -195,16 +195,16 @@ public class ArduinoSerialReader : MonoBehaviour
         {
             lock (dataLock)
             {
-                RawHorizontal =
+                RawHorizontal = // Asigna el valor convertido a la propiedad RawHorizontal
                 horizontal;
 
-                RawVertical =
+                RawVertical = // Asigna el valor convertido a la propiedad RawVertical
                 vertical;
 
-                FireButton =
+                FireButton = // Asigna el valor convertido a la propiedad FireButton
                 fire == 1;
 
-                BoostButton =
+                BoostButton =   // Asigna el valor convertido a la propiedad BoostButton
                 boost == 1;
             }
         }
