@@ -4,6 +4,8 @@ public class Bullet : MonoBehaviour
 {
     public float speed = 30f;
 
+    public float inheritedSpeed;
+
     public float lifeTime = 3f;
 
     public int damage = 1;
@@ -17,38 +19,26 @@ public class Bullet : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(
-        Vector3.forward *
-        speed *
-        Time.deltaTime);
+        transform.position +=
+        transform.forward *
+        (speed + inheritedSpeed) *
+        Time.deltaTime;
     }
 
     void OnTriggerEnter(
-Collider other)
+    Collider other)
     {
-        Debug.Log(
-        "Golpee: "
-        + other.name);
-
         EnemyHealth enemy =
         other.GetComponentInParent<
         EnemyHealth>();
 
         if (enemy != null)
         {
-            Debug.Log(
-            "Aqui ENEMYHEALTH");
-
             enemy.TakeDamage(
             damage);
 
             Destroy(
             gameObject);
-        }
-        else
-        {
-            Debug.Log(
-            "NO ENCONTRE ENEMYHEALTH");
         }
     }
 }

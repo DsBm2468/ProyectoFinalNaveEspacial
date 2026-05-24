@@ -4,7 +4,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public float baseSpeed = 20f;
 
-    public float maxBoostSpeed = 45f;
+    public float maxBoostSpeed = 50f;
 
     public float acceleration = 20f;
 
@@ -111,5 +111,9 @@ public class PlayerMovement : MonoBehaviour
         targetSpeed,
         changeRate *
         Time.deltaTime);
+    }
+    public float GetCurrentSpeed() // Método público para obtener la velocidad actual del jugador
+    {
+        return currentSpeed; 
     }
 }

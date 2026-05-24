@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
@@ -16,23 +15,11 @@ public class GameManager : MonoBehaviour
 
     public PlayerHealth playerHealth;
 
-
+    public GameObject clearMessage;
 
     void Awake()
     {
-        if (
-        Instance == null)
-        {
-            Instance = this;
-
-            DontDestroyOnLoad(
-            gameObject);
-        }
-        else
-        {
-            Destroy(
-            gameObject);
-        }
+        Instance = this;
     }
 
     public void EnemySpawned()
@@ -46,8 +33,7 @@ public class GameManager : MonoBehaviour
 
         enemiesKilled++;
 
-        if (
-        enemiesAlive <= 0)
+        if (enemiesAlive <= 0)
         {
             Invoke(
             nameof(
@@ -56,12 +42,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public GameObject clearMessage;
-
     void SectorCleared()
     {
-        clearMessage
-        .SetActive(true);
+        if (
+        clearMessage != null)
+        {
+            clearMessage
+            .SetActive(
+            true);
+        }
 
         Invoke(
         nameof(

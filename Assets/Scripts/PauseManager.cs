@@ -27,17 +27,65 @@ public class PauseManager : MonoBehaviour
         arduino =
         ArduinoSerialReader.Instance;
 
-        pausePanel.SetActive(
-        false);
+        FindUI();
+
+        if (
+        pausePanel != null)
+        {
+            pausePanel.SetActive(
+            false);
+        }
 
         UpdateVisual();
     }
 
+    void FindUI()
+    {
+        if (
+        pausePanel == null)
+        {
+            pausePanel =
+            GameObject.Find(
+            "PausePanel");
+        }
+
+        if (
+        continueText == null)
+        {
+            continueText =
+            GameObject.Find(
+            "ContinueText")
+            ?.GetComponent<
+            TMP_Text>();
+        }
+
+        if (
+        exitText == null)
+        {
+            exitText =
+            GameObject.Find(
+            "ExitText")
+            ?.GetComponent<
+            TMP_Text>();
+        }
+    }
+
     void Update()
     {
+        if (
+        pausePanel == null
+        ||
+        continueText == null
+        ||
+        exitText == null)
+        {
+            FindUI();
+        }
+
         HandlePause();
 
-        if (!paused)
+        if (
+        !paused)
             return;
 
         HandleMenuInput();
@@ -70,7 +118,8 @@ public class PauseManager : MonoBehaviour
             currentPause;
         }
 
-        if (pauseInput)
+        if (
+        pauseInput)
         {
             TogglePause();
         }
@@ -78,7 +127,7 @@ public class PauseManager : MonoBehaviour
 
     void HandleMenuInput()
     {
-        bool navigate = 
+        bool navigate =
         Input.GetKeyDown(
         KeyCode.Space);
 
@@ -92,10 +141,10 @@ public class PauseManager : MonoBehaviour
         arduino.IsConnected)
         {
             bool currentNavigate =
-            arduino.FireButton; // Asumiendo que el botón de disparo se usa para navegar
+            arduino.FireButton;
 
             bool currentAccept =
-            arduino.BoostButton; // Asumiendo que el botón de boost se usa para aceptar
+            arduino.BoostButton;
 
             navigate =
             currentNavigate
@@ -114,19 +163,18 @@ public class PauseManager : MonoBehaviour
             currentAccept;
         }
 
-        if (navigate)
+        if (
+        navigate)
         {
-            selectedOption++;
-
-            if (selectedOption > 1)
-            {
-                selectedOption = 0;
-            }
+            selectedOption =
+            (selectedOption + 1)
+            % 2;
 
             UpdateVisual();
         }
 
-        if (accept)
+        if (
+        accept)
         {
             ExecuteOption();
         }
@@ -134,11 +182,11 @@ public class PauseManager : MonoBehaviour
 
     void ExecuteOption()
     {
-        if (selectedOption == 0)
+        if (
+        selectedOption == 0)
         {
             TogglePause();
         }
-
         else
         {
             Time.timeScale =
@@ -161,8 +209,12 @@ public class PauseManager : MonoBehaviour
         :
         1;
 
-        pausePanel.SetActive(
-        paused);
+        if (
+        pausePanel != null)
+        {
+            pausePanel.SetActive(
+            paused);
+        }
 
         selectedOption =
         0;
@@ -172,6 +224,12 @@ public class PauseManager : MonoBehaviour
 
     void UpdateVisual()
     {
+        if (
+        continueText == null
+        ||
+        exitText == null)
+            return;
+
         continueText.text =
         selectedOption == 0
         ?

@@ -6,43 +6,20 @@ public class PlayerShoot : MonoBehaviour
 
     public Transform firePoint;
 
-    private ArduinoSerialReader arduino;
-
-    private bool previousFireState;
+    PlayerMovement player;
 
     void Start()
     {
-        arduino =
-        ArduinoSerialReader.Instance; 
+        player =
+        GetComponent<
+        PlayerMovement>();
     }
 
     void Update()
     {
-        bool shootInput =
-        Input.GetKeyDown(
-        KeyCode.Space);
-
         if (
-        arduino != null // chequear si la instancia de ArduinoSerialReader está disponible
-        &&
-        arduino.IsConnected) // chequear si el arduino está conectado antes de leer su estado
-        {
-            bool currentFire = // leer el estado del botón de disparo desde el Arduino
-            arduino.FireButton;
-
-            if (
-            currentFire
-            &&
-            !previousFireState)
-            {
-                shootInput = true;
-            }
-
-            previousFireState =
-            currentFire;
-        }
-
-        if (shootInput)
+        Input.GetKeyDown(
+        KeyCode.Space))
         {
             Shoot();
         }
@@ -50,9 +27,21 @@ public class PlayerShoot : MonoBehaviour
 
     void Shoot()
     {
+        GameObject bullet = 
         Instantiate(
         bulletPrefab,
-        firePoint.position,
-        firePoint.rotation);
+        firePoint.position, // Spawnea la bala en la posición del firePoint
+        firePoint.rotation); // Rota la bala para que apunte en la dirección del firePoint
+
+        Bullet bulletScript = 
+        bullet.GetComponent<
+        Bullet>();
+
+        if (
+        bulletScript != null)
+        {
+            bulletScript.inheritedSpeed =
+            player.GetCurrentSpeed(); // Pasa la velocidad actual del jugador a la bala para que esta herede esa velocidad
+        }
     }
 }

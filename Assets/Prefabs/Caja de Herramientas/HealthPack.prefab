@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7801517585927011089}
   - component: {fileID: 1039823522942667500}
+  - component: {fileID: 7316217582634038125}
   m_Layer: 0
   m_Name: HealthPack
   m_TagString: HealthPack
@@ -54,6 +55,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.42382717, y: 0.46760714, z: 0.66056633}
   m_Center: {x: 0.08762455, y: 0.7050076, z: -1.5062342}
+--- !u!114 &7316217582634038125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3596023310555164642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 855e46b894c027144a2eeb43778fba3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthPickup
+  healAmount: 20
 --- !u!1001 &1113423075731093682
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -4,15 +4,24 @@ public class PlayerHealth : MonoBehaviour
 {
     public int maxHealth = 100;
 
-    private int currentHealth;
+    int currentHealth;
+
+    HealthUI ui;
 
     void Start()
     {
-        currentHealth = maxHealth;
+        currentHealth =
+        maxHealth;
+
+        ui =
+        FindFirstObjectByType<
+        HealthUI>();
+
+        UpdateUI();
     }
 
     public void TakeDamage(
-     int damage)
+    int damage)
     {
         currentHealth -=
         damage;
@@ -23,15 +32,18 @@ public class PlayerHealth : MonoBehaviour
         0,
         maxHealth);
 
+        UpdateUI();
+
         if (currentHealth <= 0)
         {
-            Debug.Log(
-            "Jugador destruido");
+            GameOverManager
+            .Instance
+            .Show();
         }
     }
 
     public void Heal(
-   int amount)
+    int amount)
     {
         currentHealth +=
         amount;
@@ -41,16 +53,25 @@ public class PlayerHealth : MonoBehaviour
         currentHealth,
         0,
         maxHealth);
-    }
 
-    public int GetHealth()
-    {
-        return currentHealth;
+        UpdateUI();
     }
 
     public void ResetHealth()
     {
         currentHealth =
         maxHealth;
+
+        UpdateUI();
+    }
+
+    void UpdateUI()
+    {
+        if (ui != null)
+        {
+            ui.UpdateHealth(
+            currentHealth,
+            maxHealth);
+        }
     }
 }

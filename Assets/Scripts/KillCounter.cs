@@ -13,9 +13,9 @@ public class KillCounter : MonoBehaviour
             return;
 
         textCounter.text =
-        "Enemigos: "
+        "Objetivos: "
         +
         GameManager.Instance
-        .enemiesKilled;
+        .enemiesAlive;
     }
 }
