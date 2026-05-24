@@ -11,35 +11,44 @@ public class Bullet : MonoBehaviour
     void Start()
     {
         Destroy(
-            gameObject,
-            lifeTime
-        );
+        gameObject,
+        lifeTime);
     }
 
     void Update()
     {
         transform.Translate(
-            Vector3.forward *
-            speed *
-            Time.deltaTime
-        );
+        Vector3.forward *
+        speed *
+        Time.deltaTime);
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(
+Collider other)
     {
-        if (other.CompareTag("Enemy"))
+        Debug.Log(
+        "Golpee: "
+        + other.name);
+
+        EnemyHealth enemy =
+        other.GetComponentInParent<
+        EnemyHealth>();
+
+        if (enemy != null)
         {
-            EnemyHealth enemy =
-            other.GetComponent<EnemyHealth>();
+            Debug.Log(
+            "Aqui ENEMYHEALTH");
 
-            if (enemy != null)
-            {
-                enemy.TakeDamage(
-                    damage
-                );
-            }
+            enemy.TakeDamage(
+            damage);
 
-            Destroy(gameObject);
+            Destroy(
+            gameObject);
+        }
+        else
+        {
+            Debug.Log(
+            "NO ENCONTRE ENEMYHEALTH");
         }
     }
 }

@@ -197,7 +197,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80b941c3c5501d0449bf689b44114c56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
-  maxHealth: 3
+  maxHealth: 1
+  explosionPrefab: {fileID: 4608572774585876906, guid: 721f7ba0e8f6474438a3e5c49476d196, type: 3}
 --- !u!1 &7097584144064837621
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,31 +4,53 @@ public class EnemyHealth : MonoBehaviour
 {
     public int maxHealth = 3;
 
-    private int currentHealth;
+    public GameObject explosionPrefab;
+
+    int currentHealth;
 
     void Start()
     {
-        currentHealth = maxHealth;
+        currentHealth =
+        maxHealth;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(
+    int damage)
     {
-        currentHealth -= damage;
-
-        Debug.Log(
-            gameObject.name +
-            " vida restante: " +
-            currentHealth
-        );
+        currentHealth -=
+        damage;
 
         if (currentHealth <= 0)
         {
-            Die();
+            Explode();
+
+            if (
+                GameManager.Instance
+                != null)
+            {
+                GameManager.Instance
+                .EnemyKilled();
+            }
+
+            Destroy(
+            gameObject);
         }
     }
 
-    void Die()
+    void Explode()
     {
-        Destroy(gameObject);
+        if (
+        explosionPrefab != null)
+        {
+            GameObject explosion =
+            Instantiate(
+            explosionPrefab,
+            transform.position,
+            Quaternion.identity);
+
+            Destroy(
+            explosion,
+            2f);
+        }
     }
 }

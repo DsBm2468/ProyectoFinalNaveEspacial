@@ -1,29 +1,26 @@
 using UnityEngine;
 
-public class EnemySpawner : MonoBehaviour
+public class HealthSpawner : MonoBehaviour
 {
-    public GameObject enemyPrefab;
+    public GameObject healthPrefab;
+
+    public int amount = 3;
 
     public Vector2 xRange;
 
     public Vector2 yRange;
 
-    public int minEnemies = 10;
+    public float zMin = 40;
 
-    public int maxEnemies = 25;
+    public float zMax = 150;
 
     void Start()
     {
-        SpawnWave();
+        SpawnHealth();
     }
 
-    void SpawnWave()
+    void SpawnHealth()
     {
-        int amount =
-        Random.Range(
-        minEnemies,
-        maxEnemies + 1);
-
         for (
         int i = 0;
         i < amount;
@@ -40,16 +37,13 @@ public class EnemySpawner : MonoBehaviour
             yRange.y),
 
             Random.Range(
-            40,
-            120));
+            zMin,
+            zMax));
 
             Instantiate(
-            enemyPrefab,
+            healthPrefab,
             pos,
             Quaternion.identity);
-
-            GameManager.Instance
-            .EnemySpawned();
         }
     }
 }

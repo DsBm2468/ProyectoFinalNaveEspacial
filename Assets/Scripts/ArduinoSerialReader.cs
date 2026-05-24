@@ -24,13 +24,13 @@ public class ArduinoSerialReader : MonoBehaviour
     [SerializeField]
     private bool autoConnectOnStart = true;
 
-    public int RawHorizontal // X movimiento
+    public int RawHorizontal
     {
         get;
         private set;
     }
 
-    public int RawVertical // Y movimiento
+    public int RawVertical
     {
         get;
         private set;
@@ -43,6 +43,12 @@ public class ArduinoSerialReader : MonoBehaviour
     }
 
     public bool BoostButton
+    {
+        get;
+        private set;
+    }
+
+    public bool PauseButton
     {
         get;
         private set;
@@ -159,53 +165,65 @@ public class ArduinoSerialReader : MonoBehaviour
     void ParseLine(string line)
     {
         if (
-        string.IsNullOrWhiteSpace( // Evita procesar líneas vacías o solo con espacios
+        string.IsNullOrWhiteSpace(
         line))
         {
             return;
         }
 
-        string[] parts = // Divide la línea en partes usando la coma como separador
+        string[] parts =
         line.Trim().Split(',');
 
-        if (parts.Length != 4)
+        if (parts.Length != 5)
         {
             return;
         }
 
-        if ( // Intenta convertir cada parte a su tipo correspondiente (int para los valores de movimiento y bool para los botones)
-        int.TryParse( // Intenta convertir la primera parte a un entero para el movimiento horizontal
-        parts[0], // Si la conversión es exitosa, asigna el valor a la variable horizontal
-        out int horizontal) // Si la conversión falla, el método TryParse devuelve false y no se actualizan los valores
+        if (
+        int.TryParse(
+        parts[0],
+        out int horizontal)
+
         &&
 
-        int.TryParse( // Intenta convertir la segunda parte a un entero para el movimiento vertical
+        int.TryParse(
         parts[1],
         out int vertical)
+
         &&
 
         int.TryParse(
         parts[2],
         out int fire)
+
         &&
 
         int.TryParse(
         parts[3],
-        out int boost))
+        out int boost)
+
+        &&
+
+        int.TryParse(
+        parts[4],
+        out int pause))
         {
             lock (dataLock)
             {
-                RawHorizontal = // Asigna el valor convertido a la propiedad RawHorizontal
+                RawHorizontal =
                 horizontal;
 
-                RawVertical = // Asigna el valor convertido a la propiedad RawVertical
+                RawVertical =
                 vertical;
 
-                FireButton = // Asigna el valor convertido a la propiedad FireButton
+                FireButton =
                 fire == 1;
 
-                BoostButton =   // Asigna el valor convertido a la propiedad BoostButton
+                BoostButton =
                 boost == 1;
+
+                PauseButton =
+                pause == 1;
             }
         }
     }

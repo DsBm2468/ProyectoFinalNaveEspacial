@@ -28,6 +28,14 @@ public class EnemyBullet : MonoBehaviour
             if (playerHealth != null)
             {
                 playerHealth.TakeDamage(damage);
+
+                PlayerShake shake =
+                    FindFirstObjectByType<PlayerShake>();
+
+                if (shake != null)
+                {
+                    shake.HitShake();
+                }
             }
 
             Destroy(gameObject);

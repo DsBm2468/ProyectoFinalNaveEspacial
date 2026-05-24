@@ -11,22 +11,46 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(
+     int damage)
     {
-        currentHealth -= damage;
+        currentHealth -=
+        damage;
 
-        Debug.Log("Vida jugador: " + currentHealth);
+        currentHealth =
+        Mathf.Clamp(
+        currentHealth,
+        0,
+        maxHealth);
 
         if (currentHealth <= 0)
         {
-            Die();
+            Debug.Log(
+            "Jugador destruido");
         }
     }
 
-    void Die()
+    public void Heal(
+   int amount)
     {
-        Debug.Log("Jugador destruido");
+        currentHealth +=
+        amount;
 
-        Destroy(gameObject);
+        currentHealth =
+        Mathf.Clamp(
+        currentHealth,
+        0,
+        maxHealth);
+    }
+
+    public int GetHealth()
+    {
+        return currentHealth;
+    }
+
+    public void ResetHealth()
+    {
+        currentHealth =
+        maxHealth;
     }
 }
