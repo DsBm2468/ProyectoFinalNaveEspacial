@@ -6,6 +6,8 @@ public class EnemyHealth : MonoBehaviour
 
     public GameObject explosionPrefab;
 
+    public AudioClip explodeSound;
+
     int currentHealth;
 
     void Start()
@@ -31,6 +33,9 @@ public class EnemyHealth : MonoBehaviour
                 GameManager.Instance
                 .EnemyKilled();
             }
+            AudioSource.PlayClipAtPoint(
+            explodeSound,
+            transform.position);
 
             Destroy(
             gameObject);

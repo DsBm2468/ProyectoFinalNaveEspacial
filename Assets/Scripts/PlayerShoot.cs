@@ -4,7 +4,11 @@ public class PlayerShoot : MonoBehaviour
 {
     public GameObject bulletPrefab;
 
-    public Transform firePoint; // El punto desde donde se disparará la bala
+    public Transform firePoint;
+
+    public AudioClip shootSound;
+
+    AudioSource audioSource;
 
     PlayerMovement player;
 
@@ -21,21 +25,25 @@ public class PlayerShoot : MonoBehaviour
         arduino =
         ArduinoSerialReader
         .Instance;
+
+        audioSource =
+        GetComponent<
+        AudioSource>();
     }
 
     void Update()
     {
-        bool shootInput = 
-        Input.GetKeyDown( // Detecta si se presiona la barra espaciadora para disparar
+        bool shootInput =
+        Input.GetKeyDown(
         KeyCode.Space);
 
         if (
-        arduino != null // Verifica si el Arduino está conectado
+        arduino != null
         &&
         arduino.IsConnected)
         {
-            bool currentFire = // Lee el estado del botón de disparo desde el Arduino
-            arduino.FireButton; // Asegúrate de que "FireButton" sea el nombre correcto de la propiedad en tu clase ArduinoSerialReader
+            bool currentFire =
+            arduino.FireButton;
 
             if (
             currentFire
@@ -73,6 +81,14 @@ public class PlayerShoot : MonoBehaviour
         {
             bulletScript.inheritedSpeed =
             player.GetCurrentSpeed();
+        }
+
+        if (
+        shootSound
+        != null)
+        {
+            audioSource.PlayOneShot(
+            shootSound);
         }
     }
 }
