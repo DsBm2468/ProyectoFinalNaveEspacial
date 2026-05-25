@@ -16,7 +16,17 @@ public class PlayerMovement : MonoBehaviour
 
     private float currentSpeed;
 
+    public bool invertHorizontal;
+
+    public bool invertVertical;
+
     private ArduinoSerialReader arduino;
+
+    AudioSource audioSource;
+
+    public AudioClip boostSound;
+
+    bool playingBoost;
 
     void Start()
     {
@@ -24,6 +34,8 @@ public class PlayerMovement : MonoBehaviour
 
         arduino =
         ArduinoSerialReader.Instance;
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -75,6 +87,16 @@ public class PlayerMovement : MonoBehaviour
         float pitch =
         speedInput;
 
+        if (invertHorizontal)
+        {
+            yaw *= -1f;
+        }
+
+        if (invertVertical)
+        {
+            pitch *= -1f;
+        }
+
         transform.Rotate(
         Vector3.up *
         yaw *
@@ -111,6 +133,34 @@ public class PlayerMovement : MonoBehaviour
         targetSpeed,
         changeRate *
         Time.deltaTime);
+
+        if (
+            boosting
+            &&
+            !playingBoost)
+        {
+            audioSource.clip =
+            boostSound;
+
+            audioSource.loop =
+            true;
+
+            audioSource.Play();
+
+            playingBoost =
+            true;
+        }
+
+        if (
+        !boosting
+        &&
+        playingBoost)
+        {
+            audioSource.Stop();
+
+            playingBoost =
+            false;
+        }
     }
     public float GetCurrentSpeed() // Método público para obtener la velocidad actual del jugador
     {

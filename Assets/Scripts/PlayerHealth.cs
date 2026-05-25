@@ -8,10 +8,16 @@ public class PlayerHealth : MonoBehaviour
 
     HealthUI ui;
 
+    public AudioClip hitSound;
+
+    AudioSource audioSource;
+
     void Start()
     {
         currentHealth =
         maxHealth;
+
+        audioSource = GetComponent<AudioSource>();
 
         ui =
         FindFirstObjectByType<
@@ -39,6 +45,13 @@ public class PlayerHealth : MonoBehaviour
             GameOverManager
             .Instance
             .Show();
+        }
+
+        if (
+            hitSound != null)
+        {
+            audioSource.PlayOneShot(
+            hitSound);
         }
     }
 

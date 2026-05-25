@@ -2531,7 +2531,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6600978248715710513, guid: cb0b482b48111be4f9fc4aa7e16c3abc, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6981204857949202323, guid: cb0b482b48111be4f9fc4aa7e16c3abc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3268,6 +3268,10 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: -1.8510556
       objectReference: {fileID: 0}
+    - target: {fileID: 873924311860574962, guid: f58105a10047d434db9e901b964ba8c1, type: 3}
+      propertyPath: hitSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 700e9cf05c67df14893ab7631ccf91fc, type: 3}
     - target: {fileID: 2119847054993711419, guid: f58105a10047d434db9e901b964ba8c1, type: 3}
       propertyPath: shootSound
       value: 
@@ -3313,8 +3317,24 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3772843311811223705, guid: f58105a10047d434db9e901b964ba8c1, type: 3}
+      propertyPath: boostSound
+      value: 
+      objectReference: {fileID: 8300000, guid: ce42326354dc66d4bbc32b49d31271a3, type: 3}
+    - target: {fileID: 3772843311811223705, guid: f58105a10047d434db9e901b964ba8c1, type: 3}
       propertyPath: maxBoostSpeed
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3772843311811223705, guid: f58105a10047d434db9e901b964ba8c1, type: 3}
+      propertyPath: rotationSpeed
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3772843311811223705, guid: f58105a10047d434db9e901b964ba8c1, type: 3}
+      propertyPath: invertVertical
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3772843311811223705, guid: f58105a10047d434db9e901b964ba8c1, type: 3}
+      propertyPath: invertHorizontal
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4966630044636642368, guid: f58105a10047d434db9e901b964ba8c1, type: 3}
       propertyPath: m_Constraints

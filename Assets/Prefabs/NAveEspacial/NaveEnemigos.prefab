@@ -199,6 +199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   maxHealth: 1
   explosionPrefab: {fileID: 4608572774585876906, guid: 721f7ba0e8f6474438a3e5c49476d196, type: 3}
+  explodeSound: {fileID: 8300000, guid: d566b012f4655d149bdf9acc607a2927, type: 3}
 --- !u!1 &7097584144064837621
 GameObject:
   m_ObjectHideFlags: 0
