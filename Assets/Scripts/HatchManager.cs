@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HatchManager : MonoBehaviour // Control de la escotilla
 {
@@ -20,6 +21,8 @@ public class HatchManager : MonoBehaviour // Control de la escotilla
     public GameObject DeathCanvas;
     public Transform UserCamera;
     private bool userIsDead = false;
+    public Button DeathAcceptButton;
+    private bool previousArduinoAccept = false;
 
     // Se guarda en privado la información de la posición inicial de la puerta (cerrada)
     private Vector3 ClosePositionDoor1;
@@ -30,6 +33,8 @@ public class HatchManager : MonoBehaviour // Control de la escotilla
     private Vector3 OpenPositionDoor2;
 
     private bool DoorIsOpen = false; // Inicialmente la puerta estará cerrada
+
+    private bool previousArduinoButton = false;
 
     void Start()
     {
@@ -53,9 +58,34 @@ public class HatchManager : MonoBehaviour // Control de la escotilla
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        bool OpenDoorInput = Input.GetKeyDown(KeyCode.Space); // Sigue funcionando teclado
+
+        // Si Arduino está conectado también permitirá abrir/cerrar la puerta
+        if (
+        ArduinoSerialReader.Instance != null
+        &&
+        ArduinoSerialReader.Instance.IsConnected)
         {
-            DoorIsOpen = !DoorIsOpen; // Cuando se presione barra espaciadora, cambiará el estado de la puerta
+            bool currentArduinoButton =
+            ArduinoSerialReader.Instance.FireButton;
+
+            // Solo detecta el momento de pulsar, no mantener presionado
+            if (
+            currentArduinoButton
+            &&
+            !previousArduinoButton)
+            {
+                OpenDoorInput = true;
+            }
+
+            previousArduinoButton =
+            currentArduinoButton;
+        }
+
+        // Si cualquiera de los dos (teclado o Arduino) lo activa
+        if (OpenDoorInput)
+        {
+            DoorIsOpen = !DoorIsOpen; // Cuando se presione cambiará el estado de la puerta
         }
 
         // Entonces se corrobora ese estado en la puerta, según el resultado se utiliará el valor guardado en las variables correspondientes
@@ -103,6 +133,47 @@ public class HatchManager : MonoBehaviour // Control de la escotilla
                         ShowDeathUI();
                     }
                 }
+            }
+        }
+        // Si apareció el canvas de muerte
+        if (
+        userIsDead
+        &&
+        DeathCanvas.activeSelf)
+        {
+            bool acceptInput =
+            Input.GetKeyDown(
+            KeyCode.Return);
+
+            if (
+            ArduinoSerialReader.Instance != null
+            &&
+            ArduinoSerialReader.Instance.IsConnected)
+            {
+                bool currentButton =
+                ArduinoSerialReader.Instance.BoostButton;
+
+                if (
+                currentButton
+                &&
+                !previousArduinoAccept)
+                {
+                    acceptInput =
+                    true;
+                }
+
+                previousArduinoAccept =
+                currentButton;
+            }
+
+            if (
+            acceptInput
+            &&
+            DeathAcceptButton != null)
+            {
+                DeathAcceptButton
+                .onClick
+                .Invoke();
             }
         }
     }

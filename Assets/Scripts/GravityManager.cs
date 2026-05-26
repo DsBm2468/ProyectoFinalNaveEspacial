@@ -4,6 +4,8 @@ public class Gravity : MonoBehaviour
 {
     public bool ForceGravity = true; // Inicialmente la gravedad estará activada debido a que se encuentra dentro de la nave.
 
+    private bool previousArduinoGravityButton = false;
+
     [Header("Configuración del Planeta")]
     public float gravityValue = 9.81f; // Guardará la fuerza del planeta seleccionado. Empieza en 9.81 (Tierra)
 
@@ -14,9 +16,37 @@ public class Gravity : MonoBehaviour
     
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.G)) // Si presionas l tecla g (este comando es temporal)
+        bool ChangeGravityInput = Input.GetKeyDown(KeyCode.G); // Sigue funcionando teclado
+
+        // También permite activar/desactivar gravedad con Arduino
+        if (
+        ArduinoSerialReader.Instance != null
+        &&
+        ArduinoSerialReader.Instance.IsConnected)
         {
-            ForceGravity = !ForceGravity; // La gravedad se desactiva y viceversa
+            bool currentArduinoButton =
+            ArduinoSerialReader.Instance.BoostButton;
+
+            // Detecta una sola pulsación
+            if (
+            currentArduinoButton
+            &&
+            !previousArduinoGravityButton)
+            {
+                ChangeGravityInput =
+                true;
+            }
+
+            previousArduinoGravityButton =
+            currentArduinoButton;
+        }
+
+        // Si cualquiera de los dos lo activa
+        if (ChangeGravityInput)
+        {
+            ForceGravity =
+            !ForceGravity;
+
             ApplyPhysics();
         }
     }

@@ -6484,6 +6484,7 @@ GameObject:
   - component: {fileID: 1779443112}
   - component: {fileID: 1779443115}
   - component: {fileID: 1779443116}
+  - component: {fileID: 1779443117}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: FloatingObjects
@@ -6630,6 +6631,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1779443117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1779443111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32f37762584061c4286e3bef9e1cb491, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShipInteriorMovement
+  moveSpeed: 2
+  rotationSpeed: 80
+  invertHorizontal: 0
+  invertVertical: 0
 --- !u!1 &1789931924
 GameObject:
   m_ObjectHideFlags: 0
@@ -7887,6 +7904,22 @@ PrefabInstance:
       propertyPath: suctionPoint
       value: 
       objectReference: {fileID: 1726646872}
+    - target: {fileID: 5503736351135536463, guid: 945d04ea2089db443bcdda544c76f839, type: 3}
+      propertyPath: colliderDoor1
+      value: 
+      objectReference: {fileID: 1092325833}
+    - target: {fileID: 5503736351135536463, guid: 945d04ea2089db443bcdda544c76f839, type: 3}
+      propertyPath: colliderDoor2
+      value: 
+      objectReference: {fileID: 385461483}
+    - target: {fileID: 5503736351135536463, guid: 945d04ea2089db443bcdda544c76f839, type: 3}
+      propertyPath: playerCollider
+      value: 
+      objectReference: {fileID: 1779443116}
+    - target: {fileID: 5503736351135536463, guid: 945d04ea2089db443bcdda544c76f839, type: 3}
+      propertyPath: DeathAcceptButton
+      value: 
+      objectReference: {fileID: 566044194}
     - target: {fileID: 5503736351135536463, guid: 945d04ea2089db443bcdda544c76f839, type: 3}
       propertyPath: TextPressionSlider
       value: 

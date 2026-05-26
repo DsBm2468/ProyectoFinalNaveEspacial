@@ -5,6 +5,7 @@ public class EmergencyTimer : MonoBehaviour
 {
     public float timeToReturnToPilotArea = 10f; // Indica el tiempo en que nuevamente se diriga al área de pilotaje
     public bool emergencyIsOver = false; // Indica si la emergencia ya ha pasado o no, inicialmente es false
+    private bool previousArduinoAccept = false;
 
     [Header("Elementos del canvas para mostrar la alerta")]
     public GameObject TextAlert1;
@@ -28,6 +29,47 @@ public class EmergencyTimer : MonoBehaviour
             {
                 emergencyIsOver = true; // Se indica que la emergencia ya paso
                 TurnOnAlert(); // Además, se da la indicación para mostrar en pantalla la alerta
+            }
+        }
+
+        // Si la alerta ya apareció
+        if (
+        emergencyIsOver
+        &&
+        ButtonReturnPilotScene.activeSelf)
+        {
+            bool acceptInput =
+            Input.GetKeyDown(
+            KeyCode.Return); // Enter también sirve
+
+            // Si Arduino existe
+            if (
+            ArduinoSerialReader.Instance != null
+            &&
+            ArduinoSerialReader.Instance.IsConnected)
+            {
+                bool currentButton =
+                ArduinoSerialReader.Instance.BoostButton;
+
+                // Detecta una sola pulsación
+                if (
+                currentButton
+                &&
+                !previousArduinoAccept)
+                {
+                    acceptInput = true;
+                }
+
+                previousArduinoAccept =
+                currentButton;
+            }
+
+            if (acceptInput)
+            {
+                ButtonReturnPilotScene
+                .GetComponent<UnityEngine.UI.Button>()
+                .onClick
+                .Invoke();
             }
         }
     }
