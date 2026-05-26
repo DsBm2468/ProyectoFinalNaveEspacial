@@ -4,9 +4,7 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - Boundary
-  - Enemy
-  - HealthPack
+  - FloatingObjects
   layers:
   - Default
   - TransparentFX
