@@ -3,24 +3,42 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public float speed = 30f;
+
+    public float inheritedSpeed;
+
     public float lifeTime = 3f;
+
+    public int damage = 1;
 
     void Start()
     {
-        Destroy(gameObject, lifeTime);
+        Destroy(
+        gameObject,
+        lifeTime);
     }
 
     void Update()
     {
-        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        transform.position +=
+        transform.forward *
+        (speed + inheritedSpeed) *
+        Time.deltaTime;
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(
+    Collider other)
     {
-        if (other.CompareTag("Enemy"))
+        EnemyHealth enemy =
+        other.GetComponentInParent<
+        EnemyHealth>();
+
+        if (enemy != null)
         {
-            Destroy(other.gameObject);
-            Destroy(gameObject);
+            enemy.TakeDamage(
+            damage);
+
+            Destroy(
+            gameObject);
         }
     }
 }
