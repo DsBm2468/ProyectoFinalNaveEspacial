@@ -1638,7 +1638,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93f545ca70638274bb2ca5d9d8e28a9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArduinoSerialReader
-  portName: COM5
+  portName: COMP5
   baudRate: 9600
   readTimeoutMs: 100
   autoConnectOnStart: 1
