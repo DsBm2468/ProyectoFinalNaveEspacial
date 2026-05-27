@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.IO.Ports;
 using System.Threading;
+using System;
 
 public class ArduinoSerialReader : MonoBehaviour
 {
@@ -102,41 +103,91 @@ public class ArduinoSerialReader : MonoBehaviour
             return;
         }
 
-        try
+        string[] ports =
+        SerialPort.GetPortNames();
+
+        foreach (
+        string port
+        in ports)
         {
-            serialPort =
-            new SerialPort(
-            portName,
-            baudRate);
+            try
+            {
+                SerialPort testPort =
+                new SerialPort(
+                port,
+                baudRate);
 
-            serialPort.ReadTimeout =
-            readTimeoutMs;
+                testPort.ReadTimeout =
+                1500;
 
-            serialPort.NewLine =
-            "\n";
+                testPort.NewLine =
+                "\n";
 
-            serialPort.Open();
+                testPort.Open();
 
-            running = true;
+                Thread.Sleep(
+                2000);
 
-            readThread =
-            new Thread(ReadLoop);
+                string line =
+                testPort.ReadLine();
 
-            readThread.IsBackground =
-            true;
+                if (
+                string.IsNullOrWhiteSpace(
+                line))
+                {
+                    testPort.Close();
 
-            readThread.Start();
+                    continue;
+                }
 
-            IsConnected = true;
+                string[] parts =
+                line.Trim().Split(',');
 
-            Debug.Log(
-            "Arduino conectado");
+                if (
+                parts.Length != 5)
+                {
+                    testPort.Close();
+
+                    continue;
+                }
+
+                serialPort =
+                testPort;
+
+                portName =
+                port;
+
+                running =
+                true;
+
+                readThread =
+                new Thread(
+                ReadLoop);
+
+                readThread.IsBackground =
+                true;
+
+                readThread.Start();
+
+                IsConnected =
+                true;
+
+                Debug.Log(
+                "Arduino conectado en "
+                +
+                port);
+
+                return;
+            }
+
+            catch
+            {
+
+            }
         }
-        catch (System.Exception e)
-        {
-            Debug.LogError(
-            e.Message);
-        }
+
+        Debug.LogError(
+        "No se encontro Arduino");
     }
 
     void ReadLoop()
@@ -148,13 +199,18 @@ public class ArduinoSerialReader : MonoBehaviour
                 string line =
                 serialPort.ReadLine();
 
-                ParseLine(line);
+                ParseLine(
+                line);
             }
-            catch (System.TimeoutException)
+
+            catch (
+            TimeoutException)
             {
 
             }
-            catch (System.Exception e)
+
+            catch (
+            Exception e)
             {
                 Debug.LogWarning(
                 e.Message);
@@ -162,7 +218,8 @@ public class ArduinoSerialReader : MonoBehaviour
         }
     }
 
-    void ParseLine(string line)
+    void ParseLine(
+    string line)
     {
         if (
         string.IsNullOrWhiteSpace(
@@ -174,12 +231,14 @@ public class ArduinoSerialReader : MonoBehaviour
         string[] parts =
         line.Trim().Split(',');
 
-        if (parts.Length != 5)
+        if (
+        parts.Length != 5)
         {
             return;
         }
 
         if (
+
         int.TryParse(
         parts[0],
         out int horizontal)
@@ -208,7 +267,8 @@ public class ArduinoSerialReader : MonoBehaviour
         parts[4],
         out int pause))
         {
-            lock (dataLock)
+            lock (
+            dataLock)
             {
                 RawHorizontal =
                 horizontal;
@@ -232,7 +292,8 @@ public class ArduinoSerialReader : MonoBehaviour
     out float horizontal,
     out float vertical)
     {
-        lock (dataLock)
+        lock (
+        dataLock)
         {
             horizontal =
             (RawHorizontal - 512)
@@ -258,7 +319,8 @@ public class ArduinoSerialReader : MonoBehaviour
 
     public void Disconnect()
     {
-        running = false;
+        running =
+        false;
 
         if (
         readThread != null
@@ -277,7 +339,8 @@ public class ArduinoSerialReader : MonoBehaviour
             serialPort.Close();
         }
 
-        IsConnected = false;
+        IsConnected =
+        false;
     }
 
     void OnApplicationQuit()
