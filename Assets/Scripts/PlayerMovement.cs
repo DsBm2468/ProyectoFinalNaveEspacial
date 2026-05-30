@@ -20,6 +20,14 @@ public class PlayerMovement : MonoBehaviour
 
     public bool invertVertical;
 
+    public float rotationAcceleration = 200f;
+
+    public float rotationDamping = 2f;
+
+    float currentYawSpeed;
+
+    float currentPitchSpeed;
+
     private ArduinoSerialReader arduino;
 
     AudioSource audioSource;
@@ -82,7 +90,7 @@ public class PlayerMovement : MonoBehaviour
         Time.deltaTime;
 
         float yaw =
-        steeringInput;
+steeringInput;
 
         float pitch =
         speedInput;
@@ -97,16 +105,41 @@ public class PlayerMovement : MonoBehaviour
             pitch *= -1f;
         }
 
+        // Acelera la rotación
+        currentYawSpeed +=
+        yaw *
+        rotationAcceleration *
+        Time.deltaTime;
+
+        currentPitchSpeed +=
+        pitch *
+        rotationAcceleration *
+        Time.deltaTime;
+
+        // Aplica fricción espacial suave
+        currentYawSpeed =
+        Mathf.Lerp(
+        currentYawSpeed,
+        0,
+        rotationDamping *
+        Time.deltaTime);
+
+        currentPitchSpeed =
+        Mathf.Lerp(
+        currentPitchSpeed,
+        0,
+        rotationDamping *
+        Time.deltaTime);
+
+        // Rota usando la velocidad acumulada
         transform.Rotate(
         Vector3.up *
-        yaw *
-        rotationSpeed *
+        currentYawSpeed *
         Time.deltaTime);
 
         transform.Rotate(
         Vector3.right *
-        -pitch *
-        rotationSpeed *
+        -currentPitchSpeed *
         Time.deltaTime);
     }
 
