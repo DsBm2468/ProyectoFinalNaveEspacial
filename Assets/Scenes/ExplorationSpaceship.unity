@@ -917,7 +917,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1da5b7b2af37963449eec833484f200e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EmergencyTimer
-  timeToReturnToPilotArea: 60
+  timeToReturnToPilotArea: 30
   emergencyIsOver: 0
   TextAlert1: {fileID: 468538129}
   TextAlert2: {fileID: 1425067832}

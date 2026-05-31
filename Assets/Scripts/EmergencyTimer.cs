@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class EmergencyTimer : MonoBehaviour
 {
-    public float timeToReturnToPilotArea = 10f; // Indica el tiempo en que nuevamente se diriga al área de pilotaje
+    public float timeToReturnToPilotArea = 30f; // Indica el tiempo en que nuevamente se diriga al área de pilotaje
     public bool emergencyIsOver = false; // Indica si la emergencia ya ha pasado o no, inicialmente es false
     private bool previousArduinoAccept = false;
 
