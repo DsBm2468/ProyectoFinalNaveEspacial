@@ -89,8 +89,7 @@ public class PlayerMovement : MonoBehaviour
         currentSpeed *
         Time.deltaTime;
 
-        float yaw =
-steeringInput;
+        float yaw = steeringInput;
 
         float pitch =
         speedInput;
@@ -194,6 +193,9 @@ steeringInput;
             playingBoost =
             false;
         }
+        Debug.Log( "TimeScale: " + Time.timeScale); // Verificar time scale
+        Debug.Log("Velocidad actual: " + currentSpeed); // Verificar velocidad actual
+        Debug.Log(transform.position); // Verificar posición del jugador
     }
     public float GetCurrentSpeed() // Método público para obtener la velocidad actual del jugador
     {

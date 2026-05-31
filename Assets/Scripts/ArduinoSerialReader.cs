@@ -277,13 +277,13 @@ public class ArduinoSerialReader : MonoBehaviour
                 vertical;
 
                 FireButton =
-                fire == 1;
+                pause == 1;
 
                 BoostButton =
                 boost == 1;
 
                 PauseButton =
-                pause == 1;
+                fire == 1;
             }
         }
     }
