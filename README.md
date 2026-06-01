@@ -9,7 +9,7 @@ Ingeniería en Multimedia
 Ingeniería en Multimedia
 
 **Asignatura:** Realidad Mixta  
-**Año:** 2025
+**Año:** 2026
 
 ---
 
