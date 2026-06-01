@@ -217,3 +217,10 @@ Su función cambia dependiendo del contexto.
 Este proyecto fue desarrollado para la asignatura de Realidad Mixta con el objetivo de integrar conceptos de simulación interactiva, programación en Unity, diseño de interfaces, física aplicada y comunicación con dispositivos externos mediante Arduino.
 
 ---
+
+**Aclaración**
+En el proyecto de Unity (Unity Editor), la funcionalidad entre el handcraft, el arduino y el código del proyecto funcionan de forma óptima. Debido a la sensibilidad del prototipo y a la cantidad de pruebas realizadas, el descargable funciona con algunas intermitencias en el botón de selección en la pantalla de pausa.
+El commit que tiene el funcionamiento óptimo es el quinto, llamado "Se redujo el tiempo que debe pasar para que aparezca la alerta para diriguirse a la cabina del piloto, además se realizaron pruebas exitosas del funcionamiento del arduino con el handcraft terminado"
+
+Adicionalmente, anexamos video en el que evidencia el buen funcionamiento del handcraft:
+https://drive.google.com/file/d/1rHdW4-PMvmUUtfG8DXfvY9xIUZpQDWps/view?usp=sharing
