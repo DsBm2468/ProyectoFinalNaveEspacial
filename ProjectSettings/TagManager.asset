@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - FloatingObjects
+  - FloorSpaceship
   layers:
   - Default
   - TransparentFX

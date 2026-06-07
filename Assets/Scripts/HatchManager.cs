@@ -28,11 +28,12 @@ public class HatchManager : MonoBehaviour // Control de la escotilla
     private Vector3 ClosePositionDoor1;
     private Vector3 ClosePositionDoor2;
 
-    // Se guarda en privado la información de la posición de la puerta (cerrada)
+    // Se guarda en privado la infor
+    // mación de la posición de la puerta (cerrada)
     private Vector3 OpenPositionDoor1;
     private Vector3 OpenPositionDoor2;
 
-    private bool DoorIsOpen = false; // Inicialmente la puerta estará cerrada
+    public bool DoorIsOpen = false; // Inicialmente la puerta estará cerrada
 
     private bool previousArduinoButton = false;
 
@@ -117,6 +118,7 @@ public class HatchManager : MonoBehaviour // Control de la escotilla
                     // se divide la distancia actual del objeto con el rang de succión, esto se hace para volver la información a porcentaje decimal puro de más facil lectura (entre 0.0 y 1.0)
                     // el 1f (f de float) se refiere al 100% de la fuera disponible, por eso debe restarse al inicio
                     // al tener estos valores, se le multiplica la fuerza de succión, así el sistema sabe que porcentaje de fuerza le corresponde al objeto según su posición
+                    // ESTE MODELO MATEMÁTICO SIMPLIFICADO SE LLAMA ATENUACIÓN LINEAL POR DISTANCIA
 
                     obj.transform.Translate(directionToSpace * intensityForce * Time.deltaTime, Space.World); // Se cambia la posición de los objetos hacia el exterior de la nave
                     // el obj se reposiciona por medio de la multiplicación entre la  dirección de la presión hacia el exterior de la nave por la intensidad de esta fuerza,
