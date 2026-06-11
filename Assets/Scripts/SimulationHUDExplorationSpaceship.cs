@@ -24,7 +24,7 @@ public class SimulationHUDExplorationSpaceship : MonoBehaviour
     {
         if (PanelSimulations != null)
         {
-            PanelSimulations.SetActive(false); // El panel inicialmente no será visible hasta que sea solicitado con el botón de tab
+            PanelSimulations.SetActive(false); // El panel inicialmente no será visible hasta que sea solicitado con el botón de P
         }
 
         if (statusText != null)
