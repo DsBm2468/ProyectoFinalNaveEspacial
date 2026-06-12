@@ -11,6 +11,8 @@ public class SimulationHUDSpace : MonoBehaviour
     public TMP_Dropdown planetDropdown;
     public Slider orbitSlider;
     public Slider rotationSlider;
+    public Slider gravityForceSlider;
+    public Slider BoosterSlider;
 
     //[Header("Configuración")]
     //public Vector3 gravityRef = new Vector3(0, -9.81f, 0);
@@ -81,6 +83,7 @@ public class SimulationHUDSpace : MonoBehaviour
         float CBRotation = 0f;
         float CBMass = 0;
         float CBKinetic = 0f; // Energía de movimiento
+        //float CBGravityForce = 0f; // Fuerza gravitatoria
 
         if (SelectedPlanet != null)
         {
@@ -100,6 +103,25 @@ public class SimulationHUDSpace : MonoBehaviour
             // Energía Cinética: 0.5 * masa * velocidad al cuadrado (Es la energía que genera un cuerpo cuando está ganando velocidad)
             float v2 = CBOrbit * CBOrbit; // Se obtiene la velocidad al cuadrado
             CBKinetic += 0.5f * CBMass * v2;
+
+            //if (OrbitPlanetScript != null && gravityForceSlider != null)
+            //{
+            //    // Se busca en la lista de cuerpos celestes de las órbitas el que esté seleccionado
+            //    foreach (OrbitPlanet.GravitationalProperties p in OrbitPlanetScript.celestialBodies) // Por cada cuerpo celeste...
+            //    {
+            //        if (p.PSelectioned.ToString() == SelectedPlanet.planetSelectioned.ToString()) // Si el CB seleccionado es igual al cuerpo celeste seleccionado en el dropdown (para evitar equivocaciones)...
+            //        {
+            //            if (UIisVisible)
+            //            {
+            //                p.ForceAtraction = gravityForceSlider.value;
+            //            }
+                            
+            //            // Registramos el valor actual de la fuerza para mostrarlo en el texto de telemetría abajo
+            //            CBGravityForce = p.ForceAtraction;
+            //            break;
+            //        }
+            //    }
+            //}
         }
 
         if (statusText != null)
@@ -110,6 +132,7 @@ public class SimulationHUDSpace : MonoBehaviour
                               $"Masa del cuerpo: {CBMass:F2} kg\n" +
                               $"Velocidad de órbita: {CBOrbit:F1} km/h\n" +
                               $"Velocidad de rotación propia: {CBRotation:f1} km/h\n" +
+                              //$"Fuerza gravitatoria: {CBGravityForce:f1} m/s²\n" +
                               $"-------------------------------------------------\n" +
                               $"Energía Cinética: {CBKinetic:F2} J\n" +
                               $"Energía Potencial: {0.00:F2} J (Sin gravedad de superficie)\n" +
