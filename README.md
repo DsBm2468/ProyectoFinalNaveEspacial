@@ -15,18 +15,19 @@
 
 ---
 
-#### 2. Sistema de Telemetría Avanzada y Modificación en Tiempo Real (HUD)
+#### 2. Sistema de Telemetría y modificación en tiempo real (HUD)
 
 Se implementó un Panel de Control Dinámico interactivo y escalable que permite visualizar y alterar variables en tiempo real:
-* **Datos Calculados en Pantalla:** Despliegue en vivo de la Masa del cuerpo celeste enfocado, Velocidad de órbita ($km/h$), Velocidad de rotación propia, Energía Cinética ($J$) y Energía Mecánica Total.
-* **Control UI Interactivo:** Sliders y Dropdowns funcionales para la manipulación en tiempo real del comportamiento de las simulaciones principales (Sistema Solar y Entorno de Antigravedad).
+* **Datos calculados en pantalla:** Despliegue en vivo de la Masa del cuerpo celeste enfocado, Velocidad de órbita ($km/h$), Velocidad de rotación propia, Energía Cinética ($J$) y Energía Mecánica Total.
+* **Control UI interactivo:** Sliders y Dropdowns funcionales para la manipulación en tiempo real del comportamiento de las simulaciones principales (Sistema Solar y Entorno de Antigravedad).
 
 ---
 
-#### 3. Nuevos Controles de Entrada por Teclado (Build Genérico Estable)
+#### 3. Nuevos controles de entrada por teclado (Build estable)
 Para garantizar la estabilidad absoluta durante la sustentación en vivo frente al jurado, se ha configurado un mapeo de teclado robusto para el control y navegación por el entorno 3D:
-* **Tecla P:** Desplegar / Ocultar el Panel de Control Dinámico de Telemetría (UI visible e interactiva).
+* **Tecla P:** Desplegar / Ocultar el panel de control dinámico de telemetría (UI visible e interactiva).
 * **Tecla R:** Restablecer / Reiniciar la simulación física y limpiar las variables del entorno en cualquier momento.
+* 
 La navegación general en el entorno continúa siendo la presentada anteriormente.
 
 ---
