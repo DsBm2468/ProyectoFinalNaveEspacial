@@ -1,5 +1,38 @@
 # Simulador de Nave Espacial con Arduino y Unity
 
+**Estudiante:** Diana Sofía Benavides Monroy
+**Asignatura:** Electiva y profundización I - Entornos y simulación multimedia
+
+---
+
+#### 1. Integración de 5 Simulaciones Físicas Coherentes (Sin Dependencia de RigidBody)
+
+1. **Simulación de Órbitas Planetarias (Sistema Solar):** Movimiento de rotación alrededor de un punto central.
+2. **Simulación de Rotación Intrínseca:** Movimiento rotacional independiente sobre los ejes propios de cada cuerpo celeste.
+3. **Simulación de Atracción Gravitatoria por Esferas de Influencia (SOI):** Fuerza gravitacional que lleva a la nave hacia el centro del cuerpo celeste dependiendo de su rango y fuerza.
+4. **Simulación de Entorno de Antigravedad:** Activación y desactivación de fuerza de gravedad dentro de un entorno cerrado, además de la posibilidad de cambiar la gravedad a la de diferentes planetas.
+5. **Simulación de Descompresión Extrema (Escotilla):** Cambio drástico de presión en un entorno cerrado, al tener contacto con la presión del espacio, hace que todo lo que esté a su alrededor sea direccionado hacia su punto de succión.
+
+---
+
+#### 2. Sistema de Telemetría Avanzada y Modificación en Tiempo Real (HUD)
+
+Se implementó un Panel de Control Dinámico interactivo y escalable que permite visualizar y alterar variables en tiempo real:
+* **Datos Calculados en Pantalla:** Despliegue en vivo de la Masa del cuerpo celeste enfocado, Velocidad de órbita ($km/h$), Velocidad de rotación propia, Energía Cinética ($J$) y Energía Mecánica Total.
+* **Control UI Interactivo:** Sliders y Dropdowns funcionales para la manipulación en tiempo real del comportamiento de las simulaciones principales (Sistema Solar y Entorno de Antigravedad).
+
+---
+
+#### 3. Nuevos Controles de Entrada por Teclado (Build Genérico Estable)
+Para garantizar la estabilidad absoluta durante la sustentación en vivo frente al jurado, se ha configurado un mapeo de teclado robusto para el control y navegación por el entorno 3D:
+* **Tecla P:** Desplegar / Ocultar el Panel de Control Dinámico de Telemetría (UI visible e interactiva).
+* **Tecla R:** Restablecer / Reiniciar la simulación física y limpiar las variables del entorno en cualquier momento.
+La navegación general en el entorno continúa siendo la presentada anteriormente.
+
+---
+
+# Simulador de Nave Espacial con Arduino y Unity
+
 ## Autor(es)
 
 **Hugo Alexander Fonseca Chaparro**  
