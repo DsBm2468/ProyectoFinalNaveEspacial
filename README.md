@@ -5,6 +5,8 @@
 
 ---
 
+ACLARACIÓN: Toda la lógica de simulación física (sin dependencias de Rigidbody) y el desarrollo del HUD interactivo evaluados en este examen se encuentran desarrollados en la rama: SimulationsInSpace
+
 #### 1. Integración de 5 Simulaciones Físicas Coherentes (Sin Dependencia de RigidBody)
 
 1. **Simulación de Órbitas Planetarias (Sistema Solar):** Movimiento de rotación alrededor de un punto central.
